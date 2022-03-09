@@ -151,15 +151,17 @@ def start_execution():
     print(test_execution_json, file=f) # Python 3.x
     # print(test_execution_json) # final test execution json
 
+def get_parsed_yaml_file(file):
+    tas_yaml_file = open(file)
+    parsed_yaml_file = yaml.load(tas_yaml_file, Loader=yaml.FullLoader)
+    return parsed_yaml_file
+
 if __name__ == "__main__":
-    with open("input.txt", "r") as file:
-        for readline in file: 
-            line_strip = readline.strip()
-            curr_dir, pattern = init_dir_and_pattern(line_strip.split(' '))
-            # print(curr_dir,pattern)
-            test_dir = curr_dir
-            start_discovery(pattern)
+    tas_yaml_file = get_parsed_yaml_file("input.yaml")
+    for file in tas_yaml_file["inputs"]:
+        test_dir = file['start_dir']
+        pattern = file['pattern']
+        start_discovery(pattern)
     start_execution()
-    
     
 
