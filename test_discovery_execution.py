@@ -8,6 +8,7 @@ import subprocess
 from subprocess import call
 import unittest
 from unittest import TestLoader
+import yaml
 
 test_dir = None
 
